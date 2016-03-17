@@ -2,14 +2,15 @@
 var SongQueue = Songs.extend({
   //model is a song
   initialize: function() {
+    // Listen for ended on a song and when triggered, remove song from queue
+
+
   },
 
   playFirst: function() {
-    //tell the app view that there's a new current song
-      //app view should take that song and start playing it instead of prior
-    var firstSong = this.shift();
-    firstSong.play();
+    if (this.length > 0) {
+      this.at(0).play();
+    }
   }
-
 
 });
