@@ -25,7 +25,19 @@ var AppModel = Backbone.Model.extend({
       this.get('songQueue').add(song);
     }, this);
 
+    //when song triggers dequeue from library,
+    params.library.on('dequeue', function(song) {
+      //then set the current song to the next song
+      //remove the prior song from the songQueue
+      // this.set('currentSong', this.remove('songQueue', song));
+      this.get('songQueue').playFirst();
+    }, this);
+
+
   },
 
-
+  // When a song ends, it asks the song queue to get a new song
+  ended: function() {
+    this.get('songQueue').playFirst();
+  }
 });
