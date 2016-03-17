@@ -4,6 +4,12 @@ var SongQueue = Songs.extend({
   initialize: function() {
     // Listen for ended on a song and when triggered, remove song from queue
 
+    // Listen to the collection for a song that has dequeue called
+    this.on('dequeue', function(song) {
+      // If triggered
+        // Then remove the song
+      this.remove(song);
+    });
 
   },
 
