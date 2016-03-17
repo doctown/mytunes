@@ -7,3 +7,5 @@ var SongModel = Backbone.Model.extend({
   }
 
 });
+
+// Song needs a url, title, and artist

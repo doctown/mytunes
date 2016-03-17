@@ -5,3 +5,5 @@ var SongQueue = Songs.extend({
   }
 
 });
+
+// Model will be songs
