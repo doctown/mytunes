@@ -31,10 +31,10 @@ var AppModel = Backbone.Model.extend({
       //remove the prior song from the songQueue
       // this.set('currentSong', this.remove('songQueue', song));
       this.get('songQueue').trigger('dequeue', song);
-      this.get('songQueue').playFirst();
+      if (this.get('currentSong') === song) {
+        this.get('songQueue').playFirst();
+      }
     }, this);
-
-
   },
 
   // When a song ends, it asks the song queue to get a new song
