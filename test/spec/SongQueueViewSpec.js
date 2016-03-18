@@ -35,13 +35,14 @@ describe('SongQueueView', function() {
     expect(view.render).to.have.been.called;
   });
 
-  // it('removes tracks from the song queue upon click', function () {
-  //   // create a song queue view
-  //   view = new SongQueueView({collection: fakeSongs});
-  //   // mimic a click on an element in the view
-  //   view.$el.children().first().click();    
-  //   // check to see that song queue removed that song from the collection
-  //   expect(view.collection.length).to.equal(1);
-  // });
+  it('removes tracks from the song queue upon click', function () {
+    // create a song queue view
+    view = new SongQueueView({collection: fakeSongs});
+    // mimic a click on an element in the view
+    view.$el.children().first().click();
+    view.collection.trigger('dequeue', view.collection.at(0));
+    // check to see that song queue removed that song from the collection
+    expect(view.collection.length).to.equal(1);
+  });
 
 });
