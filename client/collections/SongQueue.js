@@ -2,38 +2,35 @@
 var SongQueue = Songs.extend({
   //model is a song
   initialize: function() {
-    this.on('dequeue', function(song) {
-      this.remove(song);
-      if (this.length > 0) {
+    // When a song is added
+    this.on('add', function(model) {
+      // If there are no songs in the queue, play the first song
+      if (this.length === 1) {
         this.playFirst();
       }
-    }, this);
+    });
+
     this.on('ended', function(song) {
+      // Listen for ended on a song and when triggered, remove song from queue
+      var song = song || this.at(0);
       this.remove(song);
+      // If there are any more song, play first
       if (this.length > 0) {
+        // Listen to the collection for a song that has dequeue called
         this.playFirst();
       }
-    }, this);
-  },
-
-  events: {
-    'ended': 'handleEnded'
-
+    });
+    this.on('dequeue', function(song) {
+      // If triggered
+        // Then remove the song
+      this.remove(song);
+    });
   },
 
   playFirst: function() {
-    //tell the app view that there's a new current song
-      //app view should take that song and start playing it instead of prior
     if (this.length > 0) {
-      var firstSong = this.at(0);
-      firstSong.play();
-    }
-  },
-
-  handleEnded: function (song) {
-    this.remove(song);
-    if (this.length > 0) {
-      this.playFirst();
+      this.at(0).play();
     }
   }
+
 });
